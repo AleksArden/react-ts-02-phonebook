@@ -13,8 +13,6 @@ interface IState {
   filter: string;
 }
 
-
-
 export class App extends Component<{}, IState> {
   state: IState = {
     contacts: [
@@ -25,6 +23,7 @@ export class App extends Component<{}, IState> {
     ],
     filter: '',
   };
+
   addContact = (data: NewContact): void => {
     const newContact: IContact = {
       id: nanoid(),
@@ -34,14 +33,17 @@ export class App extends Component<{}, IState> {
       contacts: [...contacts, newContact],
     }));
   };
+
   handleSearch = ({ target: { value } }: React.ChangeEvent<HTMLInputElement>): void => {
     this.setState({ filter: value });
   };
+
   handleDelete = (id: string):void => {
     this.setState(({ contacts }) => ({
       contacts: contacts.filter(contact => contact.id !== id),
     }));
   };
+  
   render() {
     const { filter, contacts } = this.state;
 

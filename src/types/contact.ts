@@ -3,4 +3,5 @@ export interface IContact {
   name: string,
   number: string,
 }
+
 export type NewContact = Pick<IContact, 'name' | 'number'>

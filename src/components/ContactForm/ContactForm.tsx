@@ -30,12 +30,14 @@ export class ContactForm extends Component<IProps, IState> {
 
     const { contacts } = this.props;
     const hasSameName = contacts.some(({ name }) => name === this.state.name);
+
     hasSameName
       ? Notiflix.Notify.warning(`${this.state.name} is already in contacts`, {
           position: 'center-center',
           cssAnimationStyle: 'zoom',
         })
       : this.props.addContact({ ...this.state });
+    
     hasSameName || this.setState({ name: '', number: '' });
   };
 

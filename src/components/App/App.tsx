@@ -6,9 +6,17 @@ import { Filter } from 'components/Filter/Filter';
 import { ContactList } from 'components/ContactList/ContactList';
 
 import css from './App.module.css';
+import { IContact, NewContact} from 'types/contact';
 
-export class App extends Component {
-  state = {
+interface IState {
+  contacts: IContact[];
+  filter: string;
+}
+
+
+
+export class App extends Component<{}, IState> {
+  state: IState = {
     contacts: [
       { id: 'id-1', name: 'Rosie Simpson', number: '459-12-56' },
       { id: 'id-2', name: 'Hermione Kline', number: '443-89-12' },
@@ -17,8 +25,8 @@ export class App extends Component {
     ],
     filter: '',
   };
-  addContact = data => {
-    const newContact = {
+  addContact = (data: NewContact): void => {
+    const newContact: IContact = {
       id: nanoid(),
       ...data,
     };
@@ -26,10 +34,10 @@ export class App extends Component {
       contacts: [...contacts, newContact],
     }));
   };
-  handleSearch = ({ target: { name, value } }) => {
-    this.setState({ [name]: value });
+  handleSearch = ({ target: { value } }: React.ChangeEvent<HTMLInputElement>): void => {
+    this.setState({ filter: value });
   };
-  handleDelete = id => {
+  handleDelete = (id: string):void => {
     this.setState(({ contacts }) => ({
       contacts: contacts.filter(contact => contact.id !== id),
     }));

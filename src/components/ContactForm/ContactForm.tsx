@@ -1,31 +1,31 @@
 import { Component } from 'react';
 import Notiflix from 'notiflix';
-import PropTypes from 'prop-types';
 
+import { IContact, NewContact} from 'types/contact';
 import css from './ContactForm.module.css';
 
-export class ContactForm extends Component {
-  static propTypes = {
-    addContact: PropTypes.func.isRequired,
-    contacts: PropTypes.arrayOf(
-      PropTypes.shape({
-        id: PropTypes.string.isRequired,
-        name: PropTypes.string.isRequired,
-        number: PropTypes.string.isRequired,
-      }).isRequired
-    ).isRequired,
-  };
+interface IProps {
+  addContact: (data: NewContact) => void,
+  contacts: IContact[]
+}
+
+interface IState {
+  name: string,
+  number: string,
+}
+
+export class ContactForm extends Component<IProps, IState> {
 
   state = {
     name: '',
     number: '',
   };
 
-  handleChange = ({ target: { name, value } }) => {
-    this.setState({ [name]: value });
+  handleChange = ({ target: { name, value } }: React.ChangeEvent<HTMLInputElement>): void => {
+    this.setState({ [name]: value } as Pick<IState, keyof IState>);
   };
 
-  handleSubmit = e => {
+  handleSubmit = (e: React.FormEvent<HTMLFormElement>): void => {
     e.preventDefault();
 
     const { contacts } = this.props;

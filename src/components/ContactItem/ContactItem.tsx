@@ -1,7 +1,12 @@
-import PropTypes from 'prop-types';
 import css from './ContactItem.module.css';
 
-export const ContactItem = ({ name, number, onDelete }) => {
+interface Iprops {
+  name: string,
+  number: string,
+  onDelete: () => void,
+}
+
+export const ContactItem = ({ name, number, onDelete }: Iprops) => {
   return (
     <>
       <p>
@@ -12,9 +17,4 @@ export const ContactItem = ({ name, number, onDelete }) => {
       </button>
     </>
   );
-};
-ContactItem.propTypes = {
-  onDelete: PropTypes.func.isRequired,
-  name: PropTypes.string.isRequired,
-  number: PropTypes.string.isRequired,
 };

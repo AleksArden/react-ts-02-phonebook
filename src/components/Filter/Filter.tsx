@@ -1,7 +1,12 @@
-import PropTypes from 'prop-types';
+
 import css from './Filter.module.css';
 
-export const Filter = ({ onChange, value }) => {
+interface IProps {
+  onChange: (evt: React.ChangeEvent<HTMLInputElement>) => void,
+  value: string,
+}
+
+export const Filter = ({ onChange, value }: IProps) => {
   return (
     <label className={css.label}>
       Find contacts by name
@@ -14,8 +19,4 @@ export const Filter = ({ onChange, value }) => {
       />
     </label>
   );
-};
-Filter.propTypes = {
-  onChange: PropTypes.func.isRequired,
-  value: PropTypes.string.isRequired,
 };

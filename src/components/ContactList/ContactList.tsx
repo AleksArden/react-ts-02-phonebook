@@ -1,10 +1,15 @@
-import PropTypes from 'prop-types';
 
 import { ContactItem } from 'components/ContactItem/ContactItem';
+import { IContact } from 'types/contact';
 
 import css from './ContactList.module.css';
 
-export const ContactList = ({ contacts, onDelete }) => {
+interface IProps {
+  contacts: IContact[],
+  onDelete: (id: string) => void,
+}
+
+export const ContactList= ({ contacts, onDelete }:IProps) => {
   return (
     <ul className={css.list}>
       {contacts.map(({ id, name, number }) => (
@@ -18,14 +23,4 @@ export const ContactList = ({ contacts, onDelete }) => {
       ))}
     </ul>
   );
-};
-ContactList.propTypes = {
-  contacts: PropTypes.arrayOf(
-    PropTypes.shape({
-      id: PropTypes.string.isRequired,
-      name: PropTypes.string.isRequired,
-      number: PropTypes.string.isRequired,
-    }).isRequired
-  ).isRequired,
-  onDelete: PropTypes.func.isRequired,
 };
